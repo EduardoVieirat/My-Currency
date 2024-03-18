@@ -1,10 +1,10 @@
 "use client";
 import api from "@/api/api";
 import QuotationCard from "@/components/quotationCard/quotationCard";
-// import Image from "next/image";
-
+import arrows from "../../assets/image.png";
 import TypeBuy from "@/components/typeBuy/typeBuy";
 import ValuesInput from "@/components/valuesInputs/valuesInputs";
+import Image from "next/image";
 
 import { useState } from "react";
 
@@ -94,7 +94,7 @@ export default function Home() {
 
   return (
     //
-    <main className="flex min-h-screen h-screen flex-col items-start justify-start p-10 bg-[url('../../assets/bg.svg')] bg-center bg-cover *:flex">
+    <main className="flex min-h-screen h-screen flex-col items-start justify-start p-20 bg-[url('../../assets/bg.svg')] bg-center bg-cover *:flex">
       <section className="items-start justify-start gap-20 w-full mb-32 h-48">
         <div className="flex-col items-center justify-center text-emerald-500 font-bold">
           <h1 className="text-5xl">DUDU</h1>
@@ -132,9 +132,10 @@ export default function Home() {
 
           <TypeBuy moneyCard={moneyCard} setMoneyCard={setMoneyCard} />
           <button
-            className="bg-neutral-400 w-40 h-16 rounded text-xl text-white items-center justify-center"
+            className="bg-neutral-400 w-52 h-16 rounded text-[1.4rem] font-bold text-white items-center justify-center gap-3"
             onClick={quotationValue}
           >
+            <Image src={arrows} width={20} height={20} />
             Converter
           </button>
         </section>
