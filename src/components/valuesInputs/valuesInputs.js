@@ -30,7 +30,7 @@ export default function ValuesInput({
   }
 
   return (
-    <section className="items-start justify-around w-96 h-32 text-xl">
+    <section className="items-start justify-between w-96 h-32 text-2xl">
       <div className="flex flex-col">
         <p className="font-medium">Dólar</p>
         <input
