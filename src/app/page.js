@@ -1,12 +1,15 @@
 "use client";
 import api from "@/api/api";
 import QuotationCard from "@/components/quotationCard/quotationCard";
-import arrows from "../../assets/image.png";
+import arrows from "../../assets/arrows.png";
 import TypeBuy from "@/components/typeBuy/typeBuy";
 import ValuesInput from "@/components/valuesInputs/valuesInputs";
 import Image from "next/image";
+import { format, parseISO } from "date-fns";
+import { ptBR } from "date-fns/locale/pt-BR";
 
 import { useState } from "react";
+import Header from "@/components/Header/header";
 
 export default function Home() {
   const [moneyCard, setMoneyCard] = useState("money");
@@ -21,6 +24,33 @@ export default function Home() {
 
   const [errorCurrency, setErrorCurrency] = useState(false);
   const [errorTax, setErrorTax] = useState(false);
+
+  const toformatDate = new Date();
+  const formatedDate = format(
+    new Date(
+      toformatDate.getFullYear(),
+      toformatDate.getMonth(),
+      toformatDate.getDate()
+    ),
+    "d 'de' MMMM 'de' u",
+    {
+      locale: ptBR,
+    }
+  );
+
+  const formatedHours = format(
+    new Date(
+      toformatDate.getFullYear(),
+      toformatDate.getMonth(),
+      toformatDate.getDate(),
+      toformatDate.getUTCHours(),
+      toformatDate.getUTCSeconds()
+    ),
+    "k' : 'mm",
+    {
+      locale: ptBR,
+    }
+  );
 
   async function quotationValue() {
     const quotationApi = await api.get("json/daily/USD-BRL/1");
@@ -93,24 +123,8 @@ export default function Home() {
   }
 
   return (
-    //
-    <main className="flex min-h-screen h-screen flex-col items-start justify-start p-20 bg-[url('../../assets/bg.svg')] bg-center bg-cover *:flex">
-      <section className="items-start justify-start gap-20 w-full mb-32 h-48">
-        <div className="flex-col items-center justify-center text-emerald-500 font-bold">
-          <h1 className="text-5xl">DUDU</h1>
-          <h3 className="text-3xl">currency</h3>
-        </div>
-        <div className="flex items-center justify-between flex-col h-32">
-          <div className="flex items-center justify-between w-full text-1xl">
-            <p className="">14 de janeiro 2021</p>
-            <p>|</p>
-            <p>21:00 UTC</p>
-          </div>
-          <p className="mt-1 block text-1xl">
-            Dados de câmbio disponibilizados pela Morningstar.
-          </p>
-        </div>
-      </section>
+    <main className="flex min-h-screen h-screen flex-col items-start justify-start p-12 md:p-20 *:flex">
+      <Header formatedDate={formatedDate} formatedHours={formatedHours} />
 
       {quatationIsConclued ? (
         <QuotationCard
@@ -118,7 +132,7 @@ export default function Home() {
           quatationObj={quatationObj}
         />
       ) : (
-        <section className="min-h-[30rem] w-full flex-col items-start justify-around *:flex">
+        <section className="min-h-[30rem] w-[30rem] flex-col items-start justify-around p-8 *:flex">
           <ValuesInput
             taxInput={taxInput}
             setTaxInput={setTaxInput}
@@ -132,7 +146,9 @@ export default function Home() {
 
           <TypeBuy moneyCard={moneyCard} setMoneyCard={setMoneyCard} />
           <button
-            className="bg-neutral-400 w-52 h-16 rounded text-[1.4rem] font-bold text-white items-center justify-center gap-3"
+            className={`bg-neutral-400 ${
+              taxInput || currencyInput ? `bg-green-600` : ""
+            } w-52 h-16 rounded text-[1.4rem] font-bold text-white items-center justify-center gap-3`}
             onClick={quotationValue}
           >
             <Image src={arrows} width={20} height={20} />
