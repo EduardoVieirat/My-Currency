@@ -16,6 +16,11 @@ body {
   font-size: 1.6rem;
 }
 
+main {
+  background-image: url("../../assets/image.png");
+  background-size: cover;
+}
+
 input[type="radio"]:checked {
   accent-color: #008b57;
 }
