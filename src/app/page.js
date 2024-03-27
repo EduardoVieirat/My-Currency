@@ -5,8 +5,6 @@ import arrows from "../../assets/arrows.png";
 import TypeBuy from "@/components/typeBuy/typeBuy";
 import ValuesInput from "@/components/valuesInputs/valuesInputs";
 import Image from "next/image";
-import { format, parseISO } from "date-fns";
-import { ptBR } from "date-fns/locale/pt-BR";
 
 import { useState } from "react";
 import Header from "@/components/Header/header";
@@ -24,33 +22,6 @@ export default function Home() {
 
   const [errorCurrency, setErrorCurrency] = useState(false);
   const [errorTax, setErrorTax] = useState(false);
-
-  const toformatDate = new Date();
-  const formatedDate = format(
-    new Date(
-      toformatDate.getFullYear(),
-      toformatDate.getMonth(),
-      toformatDate.getDate()
-    ),
-    "d 'de' MMMM 'de' u",
-    {
-      locale: ptBR,
-    }
-  );
-
-  const formatedHours = format(
-    new Date(
-      toformatDate.getFullYear(),
-      toformatDate.getMonth(),
-      toformatDate.getDate(),
-      toformatDate.getUTCHours(),
-      toformatDate.getUTCSeconds()
-    ),
-    "k' : 'mm",
-    {
-      locale: ptBR,
-    }
-  );
 
   async function quotationValue() {
     const quotationApi = await api.get("json/daily/USD-BRL/1");
@@ -124,7 +95,7 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen h-screen flex-col items-start justify-start p-12 md:p-20 *:flex">
-      <Header formatedDate={formatedDate} formatedHours={formatedHours} />
+      <Header />
 
       {quatationIsConclued ? (
         <QuotationCard
