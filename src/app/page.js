@@ -8,6 +8,7 @@ import Image from "next/image";
 
 import { useState } from "react";
 import Header from "@/components/Header/header";
+import { unformatedValues } from "@/services/formatValues";
 
 export default function Home() {
   const [moneyCard, setMoneyCard] = useState("money");
@@ -44,14 +45,12 @@ export default function Home() {
       return;
     }
 
-    const unformatedTax = taxInput.slice(2).replace(",", "");
-    const unformatedDolar = currencyInput
-      .slice(2)
-      .replace(",", "")
-      .replace(".", "")
-      .replace(".", "");
+    const { unformatedDolar, unformatedTax } = unformatedValues(
+      currencyInput,
+      taxInput
+    );
 
-    let stateTax =
+    const stateTax =
       unformatedTax.length > 2
         ? Number(unformatedTax) / 100
         : Number(unformatedTax);
@@ -89,8 +88,6 @@ export default function Home() {
     setErrorTax(false);
     setErrorCurrency(false);
     setQuatationIsConclued(true);
-
-    console.log(currencyInput);
   }
 
   return (

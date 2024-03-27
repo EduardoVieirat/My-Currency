@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { FormatValues } from "./formatValues";
+import { FormatValues } from "../../services/formatValues";
 
 export default function ValuesInput({
   taxInput,

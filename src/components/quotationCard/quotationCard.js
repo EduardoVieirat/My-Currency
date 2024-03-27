@@ -1,6 +1,6 @@
 import Image from "next/image";
 import arrow from "../../../assets/arrow.png";
-import { FormatValues } from "../valuesInputs/formatValues";
+import { FormatValues } from "../../services/formatValues";
 
 export default function QuotationCard({
   setQuatationIsConclued,
@@ -14,7 +14,7 @@ export default function QuotationCard({
     <section className="flex flex-col justify-around items-start h-[25rem] w-full">
       <button
         onClick={() => {
-          setQuatationIsConclued(false)
+          setQuatationIsConclued(false);
         }}
         className="shadow-md w-36 h-14 border-gray-300 border rounded px-5 flex items-center justify-between"
       >
