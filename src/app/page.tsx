@@ -1,21 +1,29 @@
 "use client";
-import api from "@/api/api";
-import QuotationCard from "@/components/quotationCard/quotationCard";
+
+export type TQuotation = {
+  quotation: number;
+  dolar: number;
+  tax: number;
+};
+
+import api from "../api/api";
+import QuotationCard from "../components/quotationCard/quotationCard";
 import arrows from "../../assets/arrows.png";
-import TypeBuy from "@/components/typeBuy/typeBuy";
-import ValuesInput from "@/components/valuesInputs/valuesInputs";
+import TypeBuy from "../components/typeBuy/typeBuy";
+import ValuesInput from "../components/valuesInputs/valuesInputs";
 import Image from "next/image";
 
 import { useState } from "react";
-import Header from "@/components/Header/header";
+import Header from "../components/Header/header";
+import { unformatedValues } from "../services/formatValues";
 
 export default function Home() {
   const [moneyCard, setMoneyCard] = useState("money");
   const [quatationIsConclued, setQuatationIsConclued] = useState(false);
-  const [quatationObj, setQuatationObj] = useState({
-    quotation: "",
-    dolar: "",
-    tax: "",
+  const [quatationObj, setQuatationObj] = useState<TQuotation>({
+    quotation: 0,
+    dolar: 0,
+    tax: 0,
   });
   const [currencyInput, setCurrencyInput] = useState("");
   const [taxInput, setTaxInput] = useState("");
@@ -44,14 +52,12 @@ export default function Home() {
       return;
     }
 
-    const unformatedTax = taxInput.slice(2).replace(",", "");
-    const unformatedDolar = currencyInput
-      .slice(2)
-      .replace(",", "")
-      .replace(".", "")
-      .replace(".", "");
+    const { unformatedDolar, unformatedTax } = unformatedValues(
+      currencyInput,
+      taxInput
+    );
 
-    let stateTax =
+    const stateTax =
       unformatedTax.length > 2
         ? Number(unformatedTax) / 100
         : Number(unformatedTax);
@@ -66,7 +72,7 @@ export default function Home() {
 
     if (moneyCard === "money") {
       const cal =
-        [dolarQuotation + (dolarQuotation * stateTax) / 100] *
+        Number([dolarQuotation + (dolarQuotation * stateTax) / 100]) *
         (dolarValue + iofMoney);
 
       setQuatationObj({
@@ -76,7 +82,7 @@ export default function Home() {
       });
     } else {
       const cal =
-        [dolarQuotation + (dolarQuotation * stateTax) / 100 + iofCard] *
+        Number([dolarQuotation + (dolarQuotation * stateTax) / 100 + iofCard]) *
         dolarValue;
 
       setQuatationObj({
@@ -89,8 +95,6 @@ export default function Home() {
     setErrorTax(false);
     setErrorCurrency(false);
     setQuatationIsConclued(true);
-
-    console.log(currencyInput);
   }
 
   return (
@@ -122,7 +126,7 @@ export default function Home() {
             } w-52 h-16 rounded text-[1.4rem] font-bold text-white items-center justify-center gap-3`}
             onClick={quotationValue}
           >
-            <Image src={arrows} width={20} height={20} />
+            <Image src={arrows} width={20} height={20} alt={""} />
             Converter
           </button>
         </section>
