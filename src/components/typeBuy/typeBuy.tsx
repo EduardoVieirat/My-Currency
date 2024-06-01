@@ -1,4 +1,10 @@
-export default function TypeBuy({ moneyCard, setMoneyCard }) {
+export default function TypeBuy({
+  moneyCard,
+  setMoneyCard,
+}: {
+  moneyCard: string;
+  setMoneyCard: (smc: string) => void;
+}) {
   function onChangeRadio() {
     if (moneyCard === "money") {
       setMoneyCard("card");

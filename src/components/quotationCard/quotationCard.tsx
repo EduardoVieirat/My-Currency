@@ -1,10 +1,14 @@
 import Image from "next/image";
 import arrow from "../../../assets/arrow.png";
 import { FormatValues } from "../../services/formatValues";
+import { TQuotation } from "../../app/page";
 
 export default function QuotationCard({
   setQuatationIsConclued,
   quatationObj,
+}: {
+  setQuatationIsConclued: (conclued: boolean) => void;
+  quatationObj: TQuotation;
 }) {
   const { tax, dolar, quotation } = quatationObj;
 
@@ -18,7 +22,7 @@ export default function QuotationCard({
         }}
         className="shadow-md w-36 h-14 border-gray-300 border rounded px-5 flex items-center justify-between"
       >
-        <Image src={arrow} width={15} height={15} />
+        <Image src={arrow} width={15} height={15} alt={""} />
         Voltar
       </button>
       <div>

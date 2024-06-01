@@ -2,6 +2,17 @@
 
 import { FormatValues } from "../../services/formatValues";
 
+type TValuesInput = {
+  taxInput: string;
+  setTaxInput: (ti: string) => void;
+  currencyInput: string;
+  setCurrencyInput: (ci: string) => void;
+  errorTax: boolean;
+  errorCurrency: boolean;
+  setErrorCurrency: (ec: boolean) => void;
+  setErrorTax: (et: boolean) => void;
+};
+
 export default function ValuesInput({
   taxInput,
   setTaxInput,
@@ -11,8 +22,8 @@ export default function ValuesInput({
   errorCurrency,
   setErrorCurrency,
   setErrorTax,
-}) {
-  function handleCurrency(e) {
+}: TValuesInput) {
+  function handleCurrency(e: { target: { value: string } }) {
     const formatedCurrency = FormatValues(e.target.value);
 
     setErrorCurrency(false);
@@ -20,7 +31,7 @@ export default function ValuesInput({
     setCurrencyInput(`$ ${formatedCurrency}`);
   }
 
-  function handleTax(e) {
+  function handleTax(e: { currentTarget: { value: string } }) {
     const formatedTax = FormatValues(e.currentTarget.value);
 
     setErrorTax(false);
