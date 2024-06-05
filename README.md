@@ -1,1 +1,2 @@
-# My-Currency
+# My Currency
+
