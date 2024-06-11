@@ -1,5 +1,8 @@
 import { Roboto } from "next/font/google";
 import "./globals.css";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -18,7 +21,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={roboto.className}>{children}</body>
+      const queryClient = new QueryClient()
+      <QueryClientProvider client={queryClient}>
+        <body className={roboto.className}>{children}</body>
+      </QueryClientProvider>
     </html>
   );
 }
