@@ -1,19 +1,7 @@
-export default function TypeBuy({
-  moneyCard,
-  setMoneyCard,
-}: {
-  moneyCard: string;
-  setMoneyCard: (smc: string) => void;
-}) {
-  function onChangeRadio() {
-    if (moneyCard === "money") {
-      setMoneyCard("card");
-      return;
-    } else {
-      setMoneyCard("money");
-      return;
-    }
-  }
+import { useMoneyCardStore } from "../../hooks/hooks";
+
+export default function TypeBuy() {
+  const { money, card, typeBuy } = useMoneyCardStore((state) => state);
 
   return (
     <section className="w-96 h-32 flex items-start justify-center gap-8 flex-col *:flex">
@@ -28,8 +16,8 @@ export default function TypeBuy({
             value="money"
             id="money"
             className="h-6 w-6 "
-            checked={moneyCard === "money"}
-            onChange={onChangeRadio}
+            checked={typeBuy === "money"}
+            onChange={money}
           />
           Dinheiro
         </label>
@@ -43,8 +31,8 @@ export default function TypeBuy({
             value="card"
             id="card"
             className="mr-2 h-6 w-6 "
-            checked={moneyCard === "card"}
-            onChange={onChangeRadio}
+            checked={typeBuy === "card"}
+            onChange={card}
           />
           Cartão
         </label>
