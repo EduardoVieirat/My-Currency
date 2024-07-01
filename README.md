@@ -9,8 +9,9 @@ _Este projeto consiste em um App React que usa uma API para fazer a cotação do
 - <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white">
 - Axios
 
-<!-- #### Tela Inicial
-
+#### Tela Inicial
+![preview](/images-readme/Initial-page.png)
+<!-- 
 #### Tela após solicitar a contação em dinheiro
 
 #### Tela após solicitar a contação em dinheiro
