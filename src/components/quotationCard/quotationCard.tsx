@@ -1,24 +1,24 @@
 import Image from "next/image";
 import arrow from "../../../assets/arrow.png";
-import { FormatValues } from "../../services/formatValues";
-import { TQuotation } from "../../app/page";
+import { useInputsStore, useQuotationObj } from "../../hooks/hooks";
 
-export default function QuotationCard({
-  setQuatationIsConclued,
-  quatationObj,
-}: {
-  setQuatationIsConclued: (conclued: boolean) => void;
-  quatationObj: TQuotation;
-}) {
-  const { tax, dolar, quotation } = quatationObj;
+export default function QuotationCard() {
+  const { quotationObj, setQuotationIsConclued } = useQuotationObj(
+    (state) => state
+  );
+  const { setCurrencyInput, setTaxInput } = useInputsStore((state) => state);
 
-  const showQuotation = FormatValues(quotation.toFixed(2).toString());
+  const { tax, dolar, quotation } = quotationObj;
+
+  const showQuotation = quotation.toFixed(2).toString();
 
   return (
     <section className="flex flex-col justify-around items-start h-[25rem] w-full">
       <button
         onClick={() => {
-          setQuatationIsConclued(false);
+          setQuotationIsConclued(false);
+          setCurrencyInput("0");
+          setTaxInput("0");
         }}
         className="shadow-md w-36 h-14 border-gray-300 border rounded px-5 flex items-center justify-between"
       >
