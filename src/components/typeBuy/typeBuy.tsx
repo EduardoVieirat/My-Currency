@@ -15,7 +15,7 @@ export default function TypeBuy() {
             type="radio"
             value="money"
             id="money"
-            className="h-6 w-6 "
+            className="h-6 w-6"
             checked={typeBuy === "money"}
             onChange={money}
           />
